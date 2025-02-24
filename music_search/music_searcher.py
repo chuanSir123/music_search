@@ -32,7 +32,7 @@ class MusicSearcher:
 
         if not source or source != "酷美":
             types = ["netease", "qq", "kugou", "migu"]
-            source_dict = {"网易": "netease", "qq": "qq", "酷狗": "kugou", "咪咕": "migu"}
+            source_dict = {"网易": "netease", "qq": "qq", "酷狗": "kugou", "kirara_ai.": "migu"}
             if source in source_dict:
                 types.insert(0, source_dict[source])
             result = await self._search_music(music_name, singer, types)

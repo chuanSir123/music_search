@@ -24,7 +24,7 @@ setup(
     author="chuanSir",
     author_email="416448943@qq.com",
 
-    description="WebImageGeneratePlugin for lss233/chatgpt-mirai-qq-bot",
+    description="MusicSearchPlugin for lss233/chatgpt-mirai-qq-bot",
     long_description=io.open("README.md", encoding='utf-8').read(),
     long_description_content_type="text/markdown",
     url="https://github.com/chuanSir123/music_search",

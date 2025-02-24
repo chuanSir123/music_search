@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import io
 import os
 
-version = os.environ.get('RELEASE_VERSION', '0.1.0'
+version = os.environ.get('RELEASE_VERSION', '0.1.1'
 '').lstrip('v')
 
 setup(

@@ -1,6 +1,5 @@
 from typing import Any, Dict, List, Optional, Annotated
-from kirara_ai.workflow.core.block import Block
-from kirara_ai.workflow.core.block.input_output import Input, Output
+from kirara_ai.workflow.core.block import Block, Input, Output, ParamMeta
 from kirara_ai.im.message import IMMessage, TextMessage, VoiceMessage
 from kirara_ai.im.sender import ChatSender
 from .music_searcher import MusicSearcher
@@ -10,6 +9,8 @@ from kirara_ai.ioc.container import DependencyContainer
 
 logger = get_logger("MusicSearch")
 
+def get_options_provider(container: DependencyContainer, block: Block) -> List[str]:
+    return ["酷美", "网易", "qq", "酷狗", "咪咕"]
 class MusicSearchBlock(Block):
     """音乐搜索Block"""
     name = "music_search"
@@ -24,7 +25,7 @@ class MusicSearchBlock(Block):
         "lyrics": Output(name="lyrics", label="歌词", data_type=str, description="歌词")
     }
 
-    def __init__(self, source: str = None):
+    def __init__(self, source: Annotated[Optional[str],ParamMeta(label="来源", description="要使用的音乐平台", options_provider=get_options_provider),] = "酷美",):
         super().__init__()
         self.searcher = MusicSearcher()
         self.source = source

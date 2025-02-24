@@ -3,7 +3,7 @@ import json
 import re
 from typing import Dict, Any, List
 from bs4 import BeautifulSoup
-from framework.logger import get_logger
+from kirara_ai.logger import get_logger
 
 logger = get_logger("MusicSearcher")
 

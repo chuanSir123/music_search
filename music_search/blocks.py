@@ -14,6 +14,7 @@ def get_options_provider(container: DependencyContainer, block: Block) -> List[s
 class MusicSearchBlock(Block):
     """音乐搜索Block"""
     name = "music_search"
+    description = "通过歌曲名称搜索音乐或歌词"
 
     inputs = {
         "music_name": Input(name="music_name", label="歌曲名", data_type=str, description="歌曲名称"),
@@ -76,5 +77,5 @@ class MusicUrlToIMMessage(Block):
             message_elements.append(VoiceMessage(music_url))
         if lyrics:
             message_elements.append(TextMessage(f"歌词:\n{lyrics}"))
-        
+
         return {"msg": IMMessage(sender=ChatSender.get_bot_sender(), message_elements=message_elements)}

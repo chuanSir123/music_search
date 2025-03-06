@@ -1,4 +1,4 @@
-# web-image-generate for ChatGPT-Mirai-QQ-Bot
+# music_search for ChatGPT-Mirai-QQ-Bot
 
 本项目是 [ChatGPT-Mirai-QQ-Bot](https://github.com/lss233/chatgpt-mirai-qq-bot) 的一个插件，用于搜索音乐。
 

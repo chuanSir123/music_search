@@ -103,17 +103,18 @@ class MusicSearcher:
                                 try:
                                     async with session.head(item["url"], allow_redirects=True) as resp:
                                         content_type = resp.headers.get('Content-Type', '').lower()
-
-                                        if (music_name not in item["title"] or
+                                        if((music_name not in item["title"] and music_name.lower() not in item["title"].lower() ) or
                                             "钢琴版" in item["title"] or
                                             "伴奏" in item["title"]):
                                             continue
+
 
                                         if (singer and singer != "BoaT" and
                                             singer not in item["author"]):
                                             continue
 
-                                        if ('audio' in content_type or 'mp3' in content_type):
+
+                                        if ('audio' in content_type or 'mp3' in content_type or 'mp3' in item["url"]):
                                             return item
 
                                 except Exception as e:

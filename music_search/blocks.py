@@ -19,6 +19,7 @@ class MusicSearchBlock(Block):
     inputs = {
         "music_name": Input(name="music_name", label="歌曲名", data_type=str, description="歌曲名称"),
         "singer": Input(name="singer", label="歌手", data_type=str, description="歌手名称", nullable=True, default=""),
+        "source": Input(name="source", label="歌曲来源", data_type=str, description="歌曲来源，来源列表如下['酷美', '网易', 'qq', '酷狗', '咪咕']", nullable=True, default=""),
     }
 
     outputs = {
@@ -34,15 +35,15 @@ class MusicSearchBlock(Block):
     def execute(self, **kwargs) -> Dict[str, Any]:
         music_name = kwargs.get("music_name", "")
         singer = kwargs.get("singer", "")
-        source = self.source
-
+        source = kwargs.get("source", self.source)
+        logger.info(f"搜索歌曲: {music_name} - {singer} - {source}")
         try:
             try:
                 loop = asyncio.get_event_loop()
             except RuntimeError:
                 loop = asyncio.new_event_loop()
                 asyncio.set_event_loop(loop)
-
+            logger.info(f"asyncio搜索歌曲: {music_name} - {singer} - {source}")
             result = loop.run_until_complete(
                 self.searcher._play_music({
                     "music_name": music_name,

@@ -30,11 +30,12 @@ class MusicSearcher:
     async def _get_music(self, music_name: str, singer: str, source: str, repeat: bool) -> Dict[str, Any]:
         download_link = "未找到匹配的音乐"
 
-        if not source or source != "酷美":
+        if source != "酷美":
             types = ["netease", "qq", "kugou", "migu"]
             source_dict = {"网易": "netease", "qq": "qq", "酷狗": "kugou", "kirara_ai.": "migu"}
             if source in source_dict:
                 types.insert(0, source_dict[source])
+            logger.debug(f"Searching music from {types}")
             result = await self._search_music(music_name, singer, types)
             if result:
                 music_url = result.get("url")
@@ -92,6 +93,7 @@ class MusicSearcher:
         }
 
         try:
+            logger.debug(f"Searching music: {data}")
             async with aiohttp.ClientSession() as session:
                 async with session.post(url, data=data, headers={"X-Requested-With": "XMLHttpRequest"}) as response:
                     response.raise_for_status()
@@ -166,7 +168,7 @@ class MusicSearcher:
         """获取酷美音乐的文件ID"""
         keyword = f"{singer} {music_name}" if singer else music_name
         url = f"https://www.kumeiwp.com/index/search/data?page=1&limit=50&word={keyword}&scope=all"
-
+        logger.debug(f"Searching file id: {url}")
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 response.raise_for_status()
